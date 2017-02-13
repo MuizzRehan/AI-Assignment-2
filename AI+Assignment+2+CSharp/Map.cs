@@ -50,6 +50,28 @@ namespace AI_Assignment_2_CSharp
             Write(printer);
             
         }
+        public bool SetGoal(int row,int column)
+        {
+            if (Rows - row > 0) //Validating Column Value
+            {
+                int col = Rows - row;
+                Node<T> temp = baseNode;
+                for (int i = 0; i < col; i++)
+                {
+                    temp = temp.up;
+                }
+                //We reached at appropiate row, Now struggling for Column
+                for (int i = 0; i < column; i++)
+                {
+                    if (temp.right != null)
+                        temp = temp.right;
+                }
+                //All Done , Just Set it as Start Position;
+                goalNode = temp;
+                return true;
+            }
+            return false;
+        }
         public bool SetStart(int row,int column)
         {
             if(Rows-row > 0) //Validating Column Value
