@@ -73,7 +73,7 @@ namespace AI_Assignment_2_CSharp
                         
                     }
                    
-                    for(int i=0;i<st.CouDonent;i++)
+                    for(int i=0;i<st.Count;i++)
                     {
                         if(i%columnSize == 0)
                         {
