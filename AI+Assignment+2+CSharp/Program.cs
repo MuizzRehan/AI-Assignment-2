@@ -14,18 +14,18 @@ namespace AI_Assignment_2_CSharp
         {
             Map a = new Map();
             a.AddNewNode('0');
+            a.AddNewNode('1');
+            a.AddNewNode('0');
+            a.AddNewNode('1');
+            a.AddNewRowNode('0');
+            a.AddNewNode('0');
+            a.AddNewNode('1');
+            a.AddNewNode('1');
+            a.AddNewRowNode('0');
             a.AddNewNode('0');
             a.AddNewNode('0');
-            a.AddNewNode('0');
-            a.AddNewRowNode('1');
-            a.AddNewNode('1');
-            a.AddNewNode('1');
-            a.AddNewNode('1');
-            a.AddNewRowNode('1');
-            a.AddNewNode('1');
-            a.AddNewNode('1');
             a.SetStart(0, 0);
-            a.SetGoal(2, 1);
+            a.SetGoal(2, 2);
             a.BreathFirstSearch();
             a.Display();
             Console.Read();

@@ -81,9 +81,23 @@ namespace AI_Assignment_2_CSharp
                     {
                         if(current.value==WAY)
                         {
-                            current.value = default(char);             
-                            RecursiveBreathFirstSearch(current.right);
-                            RecursiveBreathFirstSearch(current.up);
+                            
+                            if (RecursiveBreathFirstSearch(current.right))
+                            {
+                                current.value = '*';
+                            }
+                            else
+                            {
+                                current.value = '.';
+                            }
+                            if (RecursiveBreathFirstSearch(current.up))
+                            {
+                                current.value = '*';
+                            }
+                            else
+                            {
+                                current.value = '.';
+                            }
                         }else
                         {
                            
