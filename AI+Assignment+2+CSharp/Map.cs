@@ -59,8 +59,12 @@ namespace AI_Assignment_2_CSharp
         {
             if(startNode !=null && goalNode!=null)
             {
+                Console.Write("BFS Start");
                 RecursiveBreathFirstSearch(startNode,roadSymbol);
 
+            }else
+            {
+                Console.Write("BFS Failed to Start");
             }
         }
         private bool RecursiveBreathFirstSearch(Node<T> current,T RoadSymbol)
@@ -80,10 +84,12 @@ namespace AI_Assignment_2_CSharp
                     {
                         if(Node<T>.Compare(current.value,WALL))
                         {
+                            Console.Write("Is equal");
                             RecursiveBreathFirstSearch(current.right,RoadSymbol);
                             RecursiveBreathFirstSearch(current.up,RoadSymbol);
                         }else
                         {
+                            Console.Write("equal fail");
                             return false;
                         }
                     }
@@ -124,9 +130,9 @@ namespace AI_Assignment_2_CSharp
         {
             try
             {
-                if (Rows > 0) //Validating Column Value
+               
                 {
-                    Node<T> temp = startNode;
+                    Node<T> temp = baseNode;
                     for (int i = 0; i < column; i++)
                     {
                         temp = temp.right;
