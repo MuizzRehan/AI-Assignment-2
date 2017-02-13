@@ -46,6 +46,10 @@ namespace AI_Assignment_2_CSharp
             Write(printer);
             
         }
+        public bool SetStart(int row,int column)
+        {
+
+        }
         public bool AddNewRowNode(T value)
         {
             try
