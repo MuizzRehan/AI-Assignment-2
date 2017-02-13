@@ -7,20 +7,21 @@ namespace AI_Assignment_2_CSharp
     /// </summary>
     /// <typeparam name="T"></typeparam>
     class Node : IDisposable
+
     {
        [DefaultValue(99)]
-       public int value { get; set; }
+       public char value { get; set; }
        
        public Node up { get; set; }
        
        public Node right { get; set; }
         public Node()
         {
-            value = default(int);
+            value = default(char);
             up = null;
             right = null;
         }
-        public Node(int value)
+        public Node(char value)
         {
             this.value = value;
             up = null;
@@ -29,7 +30,7 @@ namespace AI_Assignment_2_CSharp
 
         public void Dispose()
         {
-            value = default(int);
+            value = default(char);
             GC.SuppressFinalize(true);
         }
         

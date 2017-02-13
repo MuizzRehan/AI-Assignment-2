@@ -18,14 +18,14 @@ namespace AI_Assignment_2_CSharp
         //Custom Use Nodes
         private Node startNode;
         private Node goalNode;
-        private int WALL;
-        private int WAY;
+        private char WALL;
+        private char WAY;
         public Map()
         {
             connector=  currentNode = currentRow = baseNode = null;
             Rows = 0;
-            WALL = int.Parse(Properties.Resources.WALL.ToString());
-            WAY = int.Parse(Properties.Resources.WAY.ToString());
+            WALL = char.Parse(Properties.Resources.WALL.ToString());
+            WAY = char.Parse(Properties.Resources.WAY.ToString());
         }
         public void Dispose()
         {
@@ -81,7 +81,7 @@ namespace AI_Assignment_2_CSharp
                     {
                         if(current.value==WAY)
                         {
-                            current.value = default(int);             
+                            current.value = default(char);             
                             RecursiveBreathFirstSearch(current.right);
                             RecursiveBreathFirstSearch(current.up);
                         }else
@@ -148,7 +148,7 @@ namespace AI_Assignment_2_CSharp
                 return false;
             }
         }
-        public bool AddNewRowNode(int value)
+        public bool AddNewRowNode(char value)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace AI_Assignment_2_CSharp
                 return false;
             }
         }
-        public bool AddNewNode(int value)
+        public bool AddNewNode(char value)
         {
             try
             {
