@@ -28,5 +28,18 @@ namespace AI_Assignment_2_CSharp
             value = default(T);
             GC.SuppressFinalize(true);
         }
+        public static bool Compare(T first,int second)
+        {
+            if(first.GetType()==second.GetType())
+            {
+                int temp = int.Parse(first.ToString());
+                if (temp == second)
+                    return true;
+                return false;
+            }else
+            {
+                throw new Exception("Both Types Must be Same");
+            }
+        }
     }
 }

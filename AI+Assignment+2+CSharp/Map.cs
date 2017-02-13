@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
-
+using System.Resources;
 namespace AI_Assignment_2_CSharp
 {
+    
     class Map<T> : IDisposable
     {
         private Node<T> currentNode;
@@ -17,10 +18,14 @@ namespace AI_Assignment_2_CSharp
         //Custom Use Nodes
         private Node<T> startNode;
         private Node<T> goalNode;
+        private int WALL;
+        private int WAY;
         public Map()
         {
             connector=  currentNode = currentRow = baseNode = null;
             Rows = 0;
+            WALL = int.Parse(Properties.Resources.WALL.ToString());
+            WAY = int.Parse(Properties.Resources.WAY.ToString());
         }
         public void Dispose()
         {
@@ -50,49 +55,95 @@ namespace AI_Assignment_2_CSharp
             Write(printer);
             
         }
-        public bool SetGoal(int row,int column)
+        public void BreathFirstSearch(T roadSymbol)
         {
-            if (Rows - row > 0) //Validating Column Value
+            if(startNode !=null && goalNode!=null)
             {
-                int col = Rows - row;
-                Node<T> temp = baseNode;
-                for (int i = 0; i < col; i++)
+                RecursiveBreathFirstSearch(startNode,roadSymbol);
+
+            }
+        }
+        private bool RecursiveBreathFirstSearch(Node<T> current,T RoadSymbol)
+        {
+            try
+            {
+                if(startNode !=null && goalNode != null)
                 {
-                    temp = temp.up;
+                    
+                    if(current == goalNode)
+                    {
+                        //We're are Goal so
+                        goalNode.value = RoadSymbol;
+                        return true;
+                    }
+                    else
+                    {
+                        if(Node<T>.Compare(current.value,WALL))
+                        {
+                            RecursiveBreathFirstSearch(current.right,RoadSymbol);
+                            RecursiveBreathFirstSearch(current.up,RoadSymbol);
+                        }else
+                        {
+                            return false;
+                        }
+                    }
                 }
-                //We reached at appropiate row, Now struggling for Column
-                for (int i = 0; i < column; i++)
-                {
-                    if (temp.right != null)
-                        temp = temp.right;
-                }
-                //All Done , Just Set it as Start Position;
-                goalNode = temp;
                 return true;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
+        }
+        public bool SetGoal(int row,int column)
+        {
+            try
+            {
+                if (Rows > 0) //Validating Column Value
+                {
+                    Node<T> temp = startNode;
+                    for(int i=0;i<column;i++)
+                    {
+                        temp = temp.right;
+                    }
+                    for(int i=0;i<row;i++)
+                    {
+                        temp = temp.up;
+                    }
+                    goalNode = temp;
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool SetStart(int row,int column)
         {
-            if(Rows-row > 0) //Validating Column Value
+            try
             {
-                int col = Rows - row;
-                Node<T> temp = baseNode;
-                for(int i=0;i<col;i++)
+                if (Rows > 0) //Validating Column Value
                 {
-                    temp = temp.up;
-                }
-                //We reached at appropiate row, Now struggling for Column
-                for(int i = 0; i < column; i++)
-                {
-                    if (temp.right != null)
+                    Node<T> temp = startNode;
+                    for (int i = 0; i < column; i++)
+                    {
                         temp = temp.right;
+                    }
+                    for (int i = 0; i < row; i++)
+                    {
+                        temp = temp.up;
+                    }
+                    startNode = temp;
+                    return true;
                 }
-                //All Done , Just Set it as Start Position;
-                startNode = temp;
-                return true;
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
         public bool AddNewRowNode(T value)
         {

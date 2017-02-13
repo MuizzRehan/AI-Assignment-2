@@ -23,6 +23,9 @@ namespace AI_Assignment_2_CSharp
             a.AddNewNode(8);
             a.AddNewRowNode(9);
             a.AddNewNode(10);
+            a.SetStart(0, 0);
+            a.SetGoal(1, 0);
+            a.BreathFirstSearch(99);
             a.Display();
             Console.Read();
         }
