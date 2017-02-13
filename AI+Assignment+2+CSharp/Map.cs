@@ -8,16 +8,16 @@ using System.Resources;
 namespace AI_Assignment_2_CSharp
 {
     
-    class Map<T> : IDisposable
+    class Map : IDisposable
     {
-        private Node<T> currentNode;
-        private Node<T> currentRow;
-        private Node<T> baseNode;
-        private Node<T> connector; //Helper for Bottom-Top Connection
+        private Node currentNode;
+        private Node currentRow;
+        private Node baseNode;
+        private Node connector; //Helper for Bottom-Top Connection
         private int Rows;
         //Custom Use Nodes
-        private Node<T> startNode;
-        private Node<T> goalNode;
+        private Node startNode;
+        private Node goalNode;
         private int WALL;
         private int WAY;
         public Map()
@@ -37,10 +37,10 @@ namespace AI_Assignment_2_CSharp
         {
             string printer = "";
             Stack<String> helper = new Stack<string>();
-            for(Node<T> i = baseNode; i != null;i=i.up)
+            for(Node i = baseNode; i != null;i=i.up)
             {
                 string temp = null;
-                for(Node<T> j = i;j!=null;j=j.right)
+                for(Node j = i;j!=null;j=j.right)
                 {
                     
                     temp+=( j.value.ToString() + "\t");
@@ -55,19 +55,16 @@ namespace AI_Assignment_2_CSharp
             Write(printer);
             
         }
-        public void BreathFirstSearch(T roadSymbol)
+        public void BreathFirstSearch()
         {
             if(startNode !=null && goalNode!=null)
             {
-                Console.Write("BFS Start");
-                RecursiveBreathFirstSearch(startNode,roadSymbol);
+                
+                RecursiveBreathFirstSearch(startNode);
 
-            }else
-            {
-                Console.Write("BFS Failed to Start");
             }
         }
-        private bool RecursiveBreathFirstSearch(Node<T> current,T RoadSymbol)
+        private bool RecursiveBreathFirstSearch(Node current)
         {
             try
             {
@@ -77,19 +74,19 @@ namespace AI_Assignment_2_CSharp
                     if(current == goalNode)
                     {
                         //We're are Goal so
-                        goalNode.value = RoadSymbol;
+                        
                         return true;
                     }
                     else
                     {
-                        if(Node<T>.Compare(current.value,WALL))
+                        if(current.value==WAY)
                         {
-                            Console.Write("Is equal");
-                            RecursiveBreathFirstSearch(current.right,RoadSymbol);
-                            RecursiveBreathFirstSearch(current.up,RoadSymbol);
+                            current.value = default(int);             
+                            RecursiveBreathFirstSearch(current.right);
+                            RecursiveBreathFirstSearch(current.up);
                         }else
                         {
-                            Console.Write("equal fail");
+                           
                             return false;
                         }
                     }
@@ -107,7 +104,7 @@ namespace AI_Assignment_2_CSharp
             {
                 if (Rows > 0) //Validating Column Value
                 {
-                    Node<T> temp = startNode;
+                    Node temp = startNode;
                     for(int i=0;i<column;i++)
                     {
                         temp = temp.right;
@@ -131,8 +128,8 @@ namespace AI_Assignment_2_CSharp
             try
             {
                
-                {
-                    Node<T> temp = baseNode;
+                
+                    Node temp = baseNode;
                     for (int i = 0; i < column; i++)
                     {
                         temp = temp.right;
@@ -143,15 +140,15 @@ namespace AI_Assignment_2_CSharp
                     }
                     startNode = temp;
                     return true;
-                }
-                return false;
+                
+                
             }
             catch
             {
                 return false;
             }
         }
-        public bool AddNewRowNode(T value)
+        public bool AddNewRowNode(int value)
         {
             try
             {
@@ -163,7 +160,7 @@ namespace AI_Assignment_2_CSharp
                 {
                     //Creating Second row
                     connector = currentRow;
-                    currentRow.up = new Node<T>(value);
+                    currentRow.up = new Node(value);
                     currentNode = currentRow.up;
                     currentRow = currentRow.up;
                     connector = connector.right;
@@ -172,7 +169,7 @@ namespace AI_Assignment_2_CSharp
                 {
                     //Valid from third row to onwards...
                     connector = currentRow;
-                    currentRow.up = new Node<T>(value);
+                    currentRow.up = new Node(value);
                     currentNode = currentRow.up;
                     currentRow = currentRow.up;
                     connector = connector.right;
@@ -185,7 +182,7 @@ namespace AI_Assignment_2_CSharp
                 return false;
             }
         }
-        public bool AddNewNode(T value)
+        public bool AddNewNode(int value)
         {
             try
             {
@@ -193,21 +190,21 @@ namespace AI_Assignment_2_CSharp
                     if(baseNode == null)
                     {
                         //Its First Node
-                        baseNode = new Node<T>(value);
+                        baseNode = new Node(value);
                         currentRow = baseNode;
                         currentNode = baseNode;
                         connector = currentRow; //For First Time/Row only
                     }
                     else if(baseNode != currentRow)
                     {
-                        currentNode.right = new Node<T>(value);
+                        currentNode.right = new Node(value);
                         currentNode = currentNode.right;
                         connector.up = currentNode;
                         connector = connector.right;
                     }
                     else
                     {
-                        currentNode.right = new Node<T>(value);
+                        currentNode.right = new Node(value);
                         currentNode = currentNode.right;
                         connector = connector.right;
                         

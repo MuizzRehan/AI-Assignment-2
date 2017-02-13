@@ -12,22 +12,24 @@ namespace AI_Assignment_2_CSharp
 
         static void Main(string[] args)
         {
-            Map<int> a = new Map<int>();
-            a.AddNewNode(9);
-            a.AddNewNode(9);
-            a.AddNewNode(9);
-            a.AddNewNode(9);
-            a.AddNewRowNode(9);
-            a.AddNewNode(9);
-            a.AddNewNode(9);
-            a.AddNewNode(9);
-            a.AddNewRowNode(9);
-            a.AddNewNode(9);
+            Map a = new Map();
+            a.AddNewNode(0);
+            a.AddNewNode(0);
+            a.AddNewNode(0);
+            a.AddNewNode(0);
+            a.AddNewRowNode(1);
+            a.AddNewNode(0);
+            a.AddNewNode(1);
+            a.AddNewNode(1);
+            a.AddNewRowNode(1);
+            a.AddNewNode(1);
+            a.AddNewNode(1);
             a.SetStart(0, 0);
-            a.SetGoal(0, 0);
-            a.BreathFirstSearch(99);
+            a.SetGoal(2, 1);
+            a.BreathFirstSearch();
             a.Display();
             Console.Read();
         }
+        
     }
 }

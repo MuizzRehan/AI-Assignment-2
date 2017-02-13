@@ -1,22 +1,26 @@
 ﻿using System;
-
+using System.ComponentModel;
 namespace AI_Assignment_2_CSharp
 {
-    class Node<T> : IDisposable
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    class Node : IDisposable
     {
-      
-       public T value { get; set; }
+       [DefaultValue(99)]
+       public int value { get; set; }
        
-       public Node<T> up { get; set; }
+       public Node up { get; set; }
        
-       public Node<T> right { get; set; }
+       public Node right { get; set; }
         public Node()
         {
-            value = default(T);
+            value = default(int);
             up = null;
             right = null;
         }
-        public Node(T value)
+        public Node(int value)
         {
             this.value = value;
             up = null;
@@ -25,21 +29,9 @@ namespace AI_Assignment_2_CSharp
 
         public void Dispose()
         {
-            value = default(T);
+            value = default(int);
             GC.SuppressFinalize(true);
         }
-        public static bool Compare(T first,int second)
-        {
-            if(first.GetType()==second.GetType())
-            {
-                int temp = int.Parse(first.ToString());
-                if (temp == second)
-                    return true;
-                return false;
-            }else
-            {
-                throw new Exception("Both Types Must be Same");
-            }
-        }
+        
     }
 }
