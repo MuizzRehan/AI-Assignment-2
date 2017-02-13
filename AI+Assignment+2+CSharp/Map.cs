@@ -55,16 +55,16 @@ namespace AI_Assignment_2_CSharp
             Write(printer);
             
         }
-        public void BreathFirstSearch()
+        public void DepthFirstSearch()
         {
             if(startNode !=null && goalNode!=null)
             {
                 
-                RecursiveBreathFirstSearch(startNode);
+                RecursiveDepthFirstSearch(startNode);
 
             }
         }
-        private bool RecursiveBreathFirstSearch(Node current)
+        private bool RecursiveDepthFirstSearch(Node current)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace AI_Assignment_2_CSharp
                         if(current.value==WAY)
                         {
                             
-                            if (RecursiveBreathFirstSearch(current.right))
+                            if (RecursiveDepthFirstSearch(current.right))
                             {
                                 current.value = '*';
                             }
@@ -90,7 +90,7 @@ namespace AI_Assignment_2_CSharp
                             {
                                 current.value = '.';
                             }
-                            if (RecursiveBreathFirstSearch(current.up))
+                            if (RecursiveDepthFirstSearch(current.up))
                             {
                                 current.value = '*';
                             }
@@ -116,24 +116,27 @@ namespace AI_Assignment_2_CSharp
         {
             try
             {
-                if (Rows > 0) //Validating Column Value
-                {
-                    Node temp = startNode;
+                
+                
+                    Node temp = baseNode;
+                
                     for(int i=0;i<column;i++)
                     {
                         temp = temp.right;
                     }
+                
                     for(int i=0;i<row;i++)
                     {
                         temp = temp.up;
                     }
-                    goalNode = temp;
+                
+                goalNode = temp;
                     return true;
-                }
-                return false;
+                
             }
-            catch
+            catch(Exception e)
             {
+                Console.Write("Exception at SetGoal"+e.Message);
                 return false;
             }
         }

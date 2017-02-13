@@ -60,7 +60,7 @@ namespace AI_Assignment_2_CSharp
                     end.x = int.Parse(c[0]);
                     end.y = int.Parse(c[1]);
                     Stack<char> st = new Stack<char>();
-                   
+                    
                     for(int i=0;i<rowSize;i++)
                     {
                         line = fileReader.ReadLine();
@@ -72,7 +72,8 @@ namespace AI_Assignment_2_CSharp
                         }
                         
                     }
-                    for(int i=0;i<st.Count;i++)
+                   
+                    for(int i=0;i<st.CouDonent;i++)
                     {
                         if(i%columnSize == 0)
                         {
@@ -82,8 +83,17 @@ namespace AI_Assignment_2_CSharp
                             map.AddNewNode(st.Pop());
                         }
                     }
-                    map.SetStart(start.x, start.y);
-                    map.SetGoal(end.x, end.y);
+                    if(!map.SetStart(start.y, start.x))
+                    {
+                        Console.WriteLine("Failed to Set Start Node");
+                        return;
+                    }
+                    if(!map.SetGoal(end.y, end.x))
+                    {
+
+                        Console.WriteLine("Failed to set Goal Node"+end.y+"*"+end.x);
+                        return;
+                    }
                     if (args.Length == 4)
                     {
                         if (args[2].Equals("printInput") || args[3].Equals("printInput"))
@@ -91,7 +101,7 @@ namespace AI_Assignment_2_CSharp
                             Console.WriteLine("**Input Matrix**");
                             map.Display();
                         }
-                        map.BreathFirstSearch();
+                        map.DepthFirstSearch();
                         if (args[2].Equals("printResult") || args[3].Equals("printResult"))
                         {
                             Console.WriteLine();
@@ -105,7 +115,7 @@ namespace AI_Assignment_2_CSharp
                             Console.WriteLine("**Input Matrix**");
                             map.Display();
                         }
-                        map.BreathFirstSearch();
+                        map.DepthFirstSearch();
                         if (args[2].Equals("printResult") )
                         {
                             Console.WriteLine();
