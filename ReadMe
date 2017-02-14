@@ -1,0 +1,16 @@
+Instructions to Use :
+1- AI+Assignment+2 is Console Application designed to Search path using Blind Search.
+   As a Console Application It fullfill and should use as Console App. You Can't It's exe Directly without the 
+   Help of Console
+
+2- Open Console at Path of .exe of Application. Start Console and Type AI+Assignment+2+CSharp(Name of .exe You Can rename and Can use Easily)
+   and then Command (Format of Command is Described Below)
+
+3-FilePath/filename.txt [printInput | printResult]
+ Usage of Command
+ 	1_ Run C:\Users\Yourname\Desktop\input.txt printInput
+	2_ Run C:\Users\Yourname\Desktop\input.txt printResult
+	3_ Run C:\Users\Yourname\Desktop\input.txt printInput printResult
+	4_ Run C:\Users\Yourname\Desktop\input.txt printResult printInput
+4- for help use Command help
+	help
